@@ -14,7 +14,7 @@ Servo servoH; //Objeto tipo Servo.
 Servo servoV; //Objeto tipo Servo.
 
 #define HORIZONTAL_SERVO_PIN 10
-#define VERTICAL_SERVO_PIN 9
+#define VERTICAL_SERVO_PIN 6
 
 #define SERVO_HIGH_LIMIT 160
 #define SERVO_LOW_LIMIT 20
