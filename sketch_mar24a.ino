@@ -30,8 +30,8 @@ void move_right() {
   int servo_horizontal_position = servoH.read();
   int next_position = servo_horizontal_position + 1;
 
-  if (servoh > SERVO_HIGH_LIMIT)
-    servoh = SERVO_HIGH_LIMIT;
+  if (next_position > SERVO_HIGH_LIMIT)
+    next_position = SERVO_HIGH_LIMIT;
 
   servoH.write(next_position);
 }
@@ -50,8 +50,8 @@ void move_up() {
   int servo_vertical_position = servoV.read();
   int next_position = servo_vertical_position + 1;
 
-  if (servov > SERVO_HIGH_LIMIT)
-    servov = SERVO_HIGH_LIMIT;
+  if (next_position > SERVO_HIGH_LIMIT)
+    next_position = SERVO_HIGH_LIMIT;
 
   servoV.write(next_position);
 }
@@ -60,8 +60,8 @@ void move_down() {
   int servo_vertical_position = servoV.read();
   int next_position = servo_vertical_position - 1;
   
-  if (servov < SERVO_LOW_LIMIT)
-    servov = SERVO_LOW_LIMIT;
+  if (next_position < SERVO_LOW_LIMIT)
+    next_position = SERVO_LOW_LIMIT;
 
   servoV.write(next_position);
 }
