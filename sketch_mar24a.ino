@@ -5,7 +5,7 @@
 */
 
 //Librería paracontrolar los servomotores
-#include <Servo.h>
+#include <ESP32Servo.h>
 
 /*Definimos los objetos tipo Servo*/
 //Para el servo con movimiento horizontal
