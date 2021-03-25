@@ -28,40 +28,44 @@ Servo servoV; //Objeto tipo Servo.
 
 void move_right() {
   int servo_horizontal_position = servoH.read();
-  int next_position = servo_horizontal_position + 1;
 
-  if (next_position > SERVO_HIGH_LIMIT)
-    next_position = SERVO_HIGH_LIMIT;
+  int position_at_limit = servo_horizontal_position == HORIZONTAL_HIGH_LIMIT;
+  int lower_than_limit = !position_at_limit;
+
+  int next_position = (position_at_limit) * HORIZONATAL_HIGH_LIMIT + (lower_than_limit) * (servo_horizontal_position + 1);
 
   servoH.write(next_position);
 }
 
 void move_left() {
   int servo_horizontal_position = servoH.read();
-  int next_position = servo_horizontal_position - 1;
 
-  if (next_position < SERVO_LOW_LIMIT)
-    next_position = SERVO_LOW_LIMIT;
-  
+  int position_at_limit = servo_horizontal_position == HORIZONTAL_LOW_LIMIT;
+  int higher_than_limit = !position_at_limit;
+
+  int next_position = (position_at_limit) * HORIZONATAL_LOW_LIMIT + (higher_than_limit) * (servo_horizontal_position - 1);
+
   servoH.write(next_position);
 }
 
 void move_up() {
   int servo_vertical_position = servoV.read();
-  int next_position = servo_vertical_position + 1;
 
-  if (next_position > SERVO_HIGH_LIMIT)
-    next_position = SERVO_HIGH_LIMIT;
+  int position_at_limit = servo_vertical_position == horizontal_high_limit;
+  int lower_than_limit = !position_at_limit;
+
+  int next_position = (position_at_limit) * horizonatal_high_limit + (lower_than_limit) * (servo_vertical_position + 1);
 
   servoV.write(next_position);
 }
 
 void move_down() {
   int servo_vertical_position = servoV.read();
-  int next_position = servo_vertical_position - 1;
-  
-  if (next_position < SERVO_LOW_LIMIT)
-    next_position = SERVO_LOW_LIMIT;
+
+  int position_at_limit = servo_horizontal_position == HORIZONTAL_LOW_LIMIT;
+  int higher_than_limit = !position_at_limit;
+
+  int next_position = (position_at_limit) * HORIZONATAL_LOW_LIMIT + (higher_than_limit) * (servo_vertical_position - 1);
 
   servoV.write(next_position);
 }
