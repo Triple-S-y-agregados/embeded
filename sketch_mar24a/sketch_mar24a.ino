@@ -29,6 +29,8 @@ Servo servoV; //Objeto tipo Servo.
 #define HIGH_LIMIT 180
 #define LOW_LIMIT    0
 
+#define ANALOG_BIAS 0 // Puede que sea buena idea cambiar esto con el tiempo
+
 enum direction{ LEFT=-1, RIGHT=1, DOWN=-1, UP=1 };
 
 void move_servo( Servo& servo, direction d ){
@@ -51,25 +53,18 @@ void loop() {
   int topr = analogRead(TOP_RIGHT_LDR);
   int botl = analogRead(BOTTOM_LEFT_LDR);
   int botr = analogRead(BOTTOM_RIGHT_LDR);
+  
   // calculando el Promedio
-  int avgtop = (topl + topr) / 2; //Promedio del top LDRs
-  int avgbot = (botl + botr) / 2; //Promedio del bottom LDRs
-  int avgleft = (topl + botl) / 2; //Promedio del left LDRs
-  int avgright = (topr + botr) / 2; //Promedio del right LDRs
+  int avgtop   = ( topl + topr ) / 2; //Promedio del top LDRs
+  int avgbot   = ( botl + botr ) / 2; //Promedio del bottom LDRs
+  int avgleft  = ( topl + botl ) / 2; //Promedio del left LDRs
+  int avgright = ( topr + botr ) / 2; //Promedio del right LDRs
 
-  if (avgtop < avgbot) {
-    move_servo(servoV, UP);
-  }
-  else if (avgbot < avgtop) {
-    move_servo(servoV, DOWN);
-  }
+  if ( avgbot > avgtop )          move_servo(servoV, UP);
+  else if ( avgbot < avgtop)      move_servo(servoV, DOWN);
   delay(50);
   
-  if (avgleft > avgright) {
-    move_servo(servoH, RIGHT);
-  }
-  else if (avgright > avgleft) {
-    move_servo(servoH, RIGHT);
-  }
+  if ( avgleft > avgright )       move_servo(servoH, RIGHT);
+  else if ( avgleft < avgright )  move_servo(servoH, LEFT);
   delay(50);
 }
