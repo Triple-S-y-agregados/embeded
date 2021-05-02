@@ -45,7 +45,7 @@ void move_servo( Servo& servo, direction d ){
 }
 
 void setup () {
-  //Serial.begin( 115200 );
+  Serial.begin( 115200 );
   servoH.attach(HORIZONTAL_SERVO_PIN);
   servoH.write(INITIAL_POSITION);
   servoV.attach(VERTICAL_SERVO_PIN);
