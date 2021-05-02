@@ -1,9 +1,6 @@
-#include <Wifi.h>
+#include "network.h";
 
 void connect_wifi() {
-  const char* ssid = "";
-  const char* password = "";
-
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
 

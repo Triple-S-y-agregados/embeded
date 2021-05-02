@@ -10,9 +10,12 @@
 Servo servoH;
 Servo servoV;
 
+#include "network.h"
+
 void setup () {
-  //Serial.begin( 115200 );
+  Serial.begin( 115200 );
   initialize_servos( servoH, servoV );
+  connect_wifi();
 }
 
 void loop() {
