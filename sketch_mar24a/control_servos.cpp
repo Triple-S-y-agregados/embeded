@@ -33,7 +33,7 @@ void update_servos( Servo& servoH, Servo& servoV ) {
   int avgtop   = average(topl, topr); //Promedio del top LDRs
   int avgbot   = average(botl, botr); //Promedio del bottom LDRs
   int avgleft  = average(topl, botl); //Promedio del left LDRs
-  int avgright = average(top,r botr); //Promedio del right LDRs
+  int avgright = average(topr, botr); //Promedio del right LDRs
 
   if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, UP    );
   else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, DOWN  );
