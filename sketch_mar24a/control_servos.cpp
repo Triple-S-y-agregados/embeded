@@ -3,6 +3,10 @@
 
 float const ANALOG_BIAS = 0; // Puede que sea buena idea cambiar esto con el tiempo
 
+int average(int a, int b) {
+  return (a + b) / 2;
+}
+
 void move_servo( Servo& servo, direction d ) {
   int servo_pos = servo.read();
   bool at_limit = (servo_pos == ((d == RIGHT || d == UP) ? HIGH_LIMIT : LOW_LIMIT));
@@ -25,10 +29,10 @@ void update_servos( Servo& servoH, Servo& servoV ) {
   int botr = analogRead(BOTTOM_RIGHT_LDR);
 
   // calculando el Promedio
-  int avgtop   = ( topl + topr ) / 2; //Promedio del top LDRs
-  int avgbot   = ( botl + botr ) / 2; //Promedio del bottom LDRs
-  int avgleft  = ( topl + botl ) / 2; //Promedio del left LDRs
-  int avgright = ( topr + botr ) / 2; //Promedio del right LDRs
+  int avgtop   = average(topl, topr); //Promedio del top LDRs
+  int avgbot   = average(botl, botr); //Promedio del bottom LDRs
+  int avgleft  = average(topl, botl); //Promedio del left LDRs
+  int avgright = average(top,r botr); //Promedio del right LDRs
 
   if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, UP    );
   else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, DOWN  );
