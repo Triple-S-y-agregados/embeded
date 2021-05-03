@@ -2,6 +2,7 @@
 #ifndef CONTROL_SERVOS_H
 #define CONTROL_SERVOS_H
 
+// Librería para controlar los servomotores
 #include <ESP32Servo.h>
 
 #define INITIAL_POSITION 0
@@ -20,9 +21,6 @@
 // Estoy suponiendo estos
 #define HIGH_LIMIT 180
 #define LOW_LIMIT    0
-
-
-
 
 //Para el servo con movimiento horizontal
 extern Servo servoH; //Objeto tipo Servo.

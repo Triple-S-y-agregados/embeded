@@ -30,8 +30,6 @@ void update_servos( Servo& servoH, Servo& servoV ) {
   int avgleft  = ( topl + botl ) / 2; //Promedio del left LDRs
   int avgright = ( topr + botr ) / 2; //Promedio del right LDRs
 
-  //
-
   if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, UP    );
   else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, DOWN  );
   delay(50);
