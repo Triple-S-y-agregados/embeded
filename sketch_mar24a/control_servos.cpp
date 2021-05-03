@@ -5,7 +5,7 @@ float const ANALOG_BIAS = 0; // Puede que sea buena idea cambiar esto con el tie
 
 void move_servo( Servo& servo, direction d ) {
   int servo_pos = servo.read();
-  bool at_limit = (servo_pos == (d == RIGHT || d == UP) ? HIGH_LIMIT : LOW_LIMIT);
+  bool at_limit = (servo_pos == ((d == RIGHT || d == UP) ? HIGH_LIMIT : LOW_LIMIT));
   int move_to = (at_limit) * HIGH_LIMIT + (!at_limit) * (servo_pos + d);
   servo.write( move_to );
 }
