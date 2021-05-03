@@ -9,9 +9,10 @@ int average(int a, int b) {
 
 void move_servo( Servo& servo, direction d ) {
   int servo_pos = servo.read();
-  bool at_limit = (servo_pos == ((d == RIGHT || d == UP) ? HIGH_LIMIT : LOW_LIMIT));
-  int move_to = (at_limit) * HIGH_LIMIT + (!at_limit) * (servo_pos + d);
-  servo.write( move_to );
+  int limit = (d == RIGHT || d == UP) ? HIGH_LIMIT : LOW_LIMIT;
+  bool at_limit = servo_pos == limit;
+  int move_to = (at_limit) * limit + (!at_limit) * (servo_pos + d);
+  servo.write(move_to);
 }
 
 void initialize_servos( Servo& servoH, Servo& servoV ) {
