@@ -16,7 +16,7 @@ void setup () {
   Serial.begin( 115200 );
   initialize_servos( servoH, servoV );
   connect_wifi();
-  initialize_server();
+  //initialize_server();
 }
 
 void loop() {
