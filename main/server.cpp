@@ -13,7 +13,7 @@ void initialize_server() {
       1); /* Core where the task should run */
 }
 
-void create_server() {}
+void create_server(void* parameter) {}
 
 void delete_server() {
     vTaskDelete(Task1);
