@@ -1,7 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <Wifi.h>
+#include <WiFi.h>
 
 #define ssid "your_ssid"
 #define password "your_password"
