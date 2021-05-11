@@ -4,7 +4,7 @@
 #include <WiFi.h>
 
 #define ssid "your_ssid"
-#define password "your_password"
+#define pwd "your_password"
 
 void connect_wifi();
 

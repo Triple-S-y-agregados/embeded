@@ -2,7 +2,7 @@
 #ifndef CONTROL_SERVOS_H
 #define CONTROL_SERVOS_H
 
-// Librería para controlar los servomotores
+
 #include <ESP32Servo.h>
 
 #define INITIAL_POSITION 0

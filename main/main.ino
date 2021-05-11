@@ -9,6 +9,7 @@ Servo servoH;
 Servo servoV;
 
 #include "network.h"
+#include "server.h"
 
 #include "server.h"
 

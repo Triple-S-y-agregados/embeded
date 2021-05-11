@@ -1,4 +1,4 @@
-#include "network.h";
+#include "network.h"
 
 void connect_wifi() {
   WiFi.mode(WIFI_STA);
@@ -8,14 +8,12 @@ void connect_wifi() {
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid, pwd);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
   Serial.println();
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
