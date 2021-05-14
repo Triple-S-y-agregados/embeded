@@ -20,7 +20,7 @@ void log_data(int analog_pin) {
     struct dblog_write_context ctx;
 
     ctx.buf = buf;
-    ctx.col_count = 10; //Num of columns for each row
+    ctx.col_count = 2;
     ctx.page_resv_bytes = 0;
     ctx.page_size_exp = 12;
     ctx.max_pages_exp = 0;
