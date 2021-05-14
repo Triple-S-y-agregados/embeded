@@ -1,5 +1,5 @@
 #include "database.h"
-#include "network.h"
+//#include "network.h"
 
 void initialize_database() {
   Serial.print(F("InitSD..\n"));
@@ -31,10 +31,10 @@ void log_data(int analog_pin) {
 
     int res = dblog_write_init(&ctx);
 
-    if (!res) {
+    /*if (!res) {
       char* ts = get_time();
       res = dblog_set_col_val(&ctx, 0, DBLOG_TYPE_TEXT, ts, 99);
-    }
+    }*/
 
     if (!res) {
       int val = analogRead(analog_pin);
