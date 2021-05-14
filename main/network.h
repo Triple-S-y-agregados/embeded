@@ -12,6 +12,6 @@ const long  gmtOffset_sec = 0;
 const int   daylightOffset_sec = 3600;
 
 void connect_wifi();
-char* getTime();
+char* get_time();
 
 #endif

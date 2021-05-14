@@ -22,7 +22,7 @@ void connect_wifi() {
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 }
 
-char* getTime() {
+char* get_time() {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
     Serial.println("Failed to obtain time");
