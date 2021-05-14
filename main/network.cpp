@@ -25,8 +25,8 @@ void connect_wifi() {
 char* get_time() {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
-    Serial.println("Failed to obtain time");
-    return;
+    char* error = "No timestamp";
+    return error;
   }
 
   char timestamp[100];
