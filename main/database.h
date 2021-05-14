@@ -27,6 +27,7 @@ void get_record();
 int32_t read_fn_wctx(struct dblog_write_context*, void*, uint32_t, size_t);
 int flush_fn(struct dblog_write_context*);
 int32_t write_fn(struct dblog_write_context*, void*, uint32_t, size_t);
+int32_t read_fn_rctx(struct dblog_read_context*, void*, uint32_t, size_t);
 void print_error(int);
 
 #endif

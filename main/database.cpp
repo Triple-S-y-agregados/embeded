@@ -48,7 +48,40 @@ void log_data(int analog_pin) {
   }
 }
 
-void get_record() {}
+void get_record() {
+  struct dblog_read_context rctx;
+
+  rctx.page_size_exp = 9;
+  rctx.read_fn = read_fn_rctx;
+
+  myFile = fopen(database_name, "r+b");
+
+  if (myFile) {
+    rctx.buf = buf;
+    int res = dblog_read_init(&rctx);
+    if (res) {
+      print_error(res);
+      fclose(myFile);
+      return;
+    }
+
+    if (memcmp(buf, sqlite_sig, 16) || buf[68] != 0xA5) {
+      Serial.print(F("Invalid DB. Try recovery.\n"));
+      fclose(myFile);
+      return;
+    }
+
+    if (BUF_SIZE < (int32_t) 1 << rctx.page_size_exp) {
+      Serial.print(F("Buffer size less than Page size. Try increasing if enough SRAM\n"));
+      fclose(myFile);
+      return;
+    }
+
+    fclose(myFile);
+  } else {
+    Serial.print(F("Open Error\n"));
+  }
+}
 
 int32_t read_fn_wctx(struct dblog_write_context *ctx, void *buf, uint32_t pos, size_t len) {
   if (fseek(myFile, pos, SEEK_SET))
@@ -72,6 +105,15 @@ int32_t write_fn(struct dblog_write_context *ctx, void *buf, uint32_t pos, size_
   if (fflush(myFile))
     return DBLOG_RES_FLUSH_ERR;
   fsync(fileno(myFile));
+  return ret;
+}
+
+int32_t read_fn_rctx(struct dblog_read_context *ctx, void *buf, uint32_t pos, size_t len) {
+  if (fseek(myFile, pos, SEEK_SET))
+    return DBLOG_RES_SEEK_ERR;
+  size_t ret = fread(buf, 1, len, myFile);
+  if (ret != len)
+    return DBLOG_RES_READ_ERR;
   return ret;
 }
 
