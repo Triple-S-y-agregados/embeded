@@ -18,4 +18,20 @@ void connect_wifi() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
+
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+}
+
+char* getTime() {
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo)){
+    Serial.println("Failed to obtain time");
+    return;
+  }
+
+  char timestamp[100];
+
+  sprintf(timestamp, "%A, %B %d %Y %H:%M:%S", &timeinfo);
+
+  return timestamp;
 }
