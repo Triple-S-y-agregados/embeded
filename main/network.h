@@ -4,14 +4,14 @@
 #include <WiFi.h>
 #include "time.h"
 
-const char* ssid = "your_ssid";
-const char* pwd = "your_password";
+extern const char* ssid;
+extern const char* pwd;
 
-const char* ntpServer = "pool.ntp.org";
-const long  gmtOffset_sec = 0;
-const int   daylightOffset_sec = 3600;
+extern const char* ntpServer;
+extern const long  gmtOffset_sec;
+extern const int   daylightOffset_sec;
 
 void connect_wifi();
-char* getTime();
+char* get_time();
 
 #endif
