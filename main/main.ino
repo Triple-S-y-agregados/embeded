@@ -11,8 +11,6 @@ Servo servoV;
 #include "network.h"
 #include "server.h"
 
-#include "server.h"
-
 void setup () {
   Serial.begin( 115200 );
   initialize_servos( servoH, servoV );
