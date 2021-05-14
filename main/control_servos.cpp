@@ -1,7 +1,7 @@
 
 #include "control_servos.h"
 
-float const ANALOG_BIAS = 0; // Puede que sea buena idea cambiar esto con el tiempo
+float const ANALOG_BIAS = 3; // Puede que sea buena idea cambiar esto con el tiempo
 
 int average(int a, int b) {
   return (a + b) / 2;
@@ -13,6 +13,9 @@ void move_servo( Servo& servo, direction d ) {
   bool at_limit = servo_pos == limit;
   int move_to = (at_limit) * limit + (!at_limit) * (servo_pos + d);
   servo.write(move_to);
+
+  Serial.print("Move to: ");
+  Serial.print(move_to);
 }
 
 void initialize_servos( Servo& servoH, Servo& servoV ) {
@@ -35,11 +38,15 @@ void update_servos( Servo& servoH, Servo& servoV ) {
   int avgleft  = average(topl, botl); //Promedio del left LDRs
   int avgright = average(topr, botr); //Promedio del right LDRs
 
-  if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, UP    );
-  else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, DOWN  );
-  delay(50);
+  Serial.println("\nVertical servo: ");
+  
+  if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, DOWN  );
+  else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, UP    );
+  delay(10);
 
-  if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, RIGHT );
-  else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, LEFT  );
-  delay(50);
+  Serial.println("\nHorizontal Servo: ");
+
+  if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, LEFT  );
+  else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, RIGHT );
+  delay(10);
 }
