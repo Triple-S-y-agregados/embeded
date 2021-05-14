@@ -32,7 +32,7 @@ void log_data(int analog_pin) {
 
     if (!res) {
       int val = analogRead(analog_pin);
-      res = dblog_set_col_val(&ctx, 0, DBLOG_TYPE_INT, &val, sizeof(int));
+      res = dblog_set_col_val(&ctx, 1, DBLOG_TYPE_INT, &val, sizeof(int));
     }
     Serial.print(F("\nLogging completed. Finalizing...\n"));
 
