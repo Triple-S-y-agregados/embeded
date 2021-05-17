@@ -9,9 +9,7 @@ Servo servoH;
 Servo servoV;
 
 #include "network.h"
-#include "server.h"
-
-#include "server.h"
+#include "client.h"
 
 void setup () {
   Serial.begin( 115200 );
