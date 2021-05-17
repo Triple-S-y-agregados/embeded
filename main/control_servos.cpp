@@ -34,12 +34,12 @@ void update_servos( Servo& servoH, Servo& servoV ) {
   int avgbot   = average(botl, botr); //Promedio del bottom LDRs
   int avgleft  = average(topl, botl); //Promedio del left LDRs
   int avgright = average(topr, botr); //Promedio del right LDRs
+  
+  if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, DOWN  );
+  else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, UP    );
+  delay(10);
 
-  if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, DOWN    );
-  else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, UP      );
-  delay(50);
-
-  if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, LEFT    );
-  else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, RIGHT   );
-  delay(50);
+  if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, LEFT  );
+  else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, RIGHT );
+  delay(10);
 }
