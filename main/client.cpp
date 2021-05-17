@@ -6,12 +6,13 @@ char json_buffer[1000];
 WebServer server(5000);
 
 void initialize_server() {
+  server_routing( server );
+  server.begin();
   xTaskCreatePinnedToCore(create_server, "Server", 10000, NULL, 0, &Task1, 1);
 }
 
 void create_server(void* this_parameter_is_completely_irrelevant_so_dont_use_it) {
-  server_routing( server );
-  server.begin();
+  server.handleClient();
 }
 
 void delete_server() {
@@ -19,15 +20,20 @@ void delete_server() {
 }
 
 void server_routing( WebServer& server) {
-  server.on("/query_last", query_last_n);
-  }
+  server.on("/query_last", HTTP_GET,  query_last_n);
+}
 
 void query_last_n() {
   Serial.println( "Querying Intensity..." );
+  if (server.args() != 1){
+    server.send(400, "text/plain", "BadRequest" + "\r\n");
+    return; 
+  }
+  
+  String str_id = server.arg(0); // parse id                              <-- TODO
+  
   jsonDocument.clear();
-  
-  // Hacer query y pasar a jsonDocument con add_json_object.
-  
+  // Query y send to jsonDocument using add_json_object.                  <-- TODO
   serializeJson( jsonDocument, json_buffer );
   server.send(200, "application/json", json_buffer);
 }

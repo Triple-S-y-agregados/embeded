@@ -1,7 +1,7 @@
 
 #include "control_servos.h"
 
-float const ANALOG_BIAS = 0; // Puede que sea buena idea cambiar esto con el tiempo
+float const ANALOG_BIAS = 3; // Puede que sea buena idea cambiar esto con el tiempo
 
 int average(int a, int b) {
   return (a + b) / 2;
