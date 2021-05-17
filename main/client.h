@@ -5,10 +5,13 @@
 #include <freertos/task.h>
 
 #include <ArduinoJson.h>
+#include <HTTPClient.h>
 
-// Port: 5000
-// Las
+#define PANEL_PIN 39
+
+// Port: 44388
 void initialize_client();
 void delete_client();
+void postVoltage();
 
 #endif

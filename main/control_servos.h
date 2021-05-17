@@ -6,7 +6,6 @@
 #include <ESP32Servo.h>
 
 #define INITIAL_POSITION 0
-#define PANEL_PIN 39
 
 // Servos
 #define HORIZONTAL_SERVO_PIN 19

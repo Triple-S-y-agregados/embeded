@@ -7,8 +7,8 @@ void connect_wifi() {
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pwd);
+  Serial.println(modem_ssid);
+  WiFi.begin(modem_ssid, modem_password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
