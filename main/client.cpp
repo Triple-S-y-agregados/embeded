@@ -1,4 +1,4 @@
-#include "server.h"
+#include "client.h"
 
 TaskHandle_t Task1;
 StaticJsonDocument<1000> jsonDocument;
@@ -26,7 +26,7 @@ void server_routing( WebServer& server) {
 void query_last_n() {
   Serial.println( "Querying Intensity..." );
   if (server.args() != 1){
-    server.send(400, "text/plain", "BadRequest" + "\r\n");
+    server.send(400, "text/plain", "BadRequest\n");
     return; 
   }
   
