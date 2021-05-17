@@ -3,8 +3,8 @@
 
 #include <WiFi.h>
 
-#define ssid "your_ssid"
-#define pwd "your_password"
+#define ssid ""
+#define pwd ""
 
 void connect_wifi();
 
