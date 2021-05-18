@@ -23,23 +23,29 @@ void initialize_servos( Servo& servoH, Servo& servoV ) {
 }
 
 void update_servos( Servo& servoH, Servo& servoV ) {
-  //capturando valores analogicos de cada LDR
-  int topl = analogRead(TOP_LEFT_LDR);
-  int topr = analogRead(TOP_RIGHT_LDR);
-  int botl = analogRead(BOTTOM_LEFT_LDR);
-  int botr = analogRead(BOTTOM_RIGHT_LDR);
+  bool readyV = false;
+  bool readyH = false;
+  do {
+    //capturando valores analogicos de cada LDR
+    int topl = analogRead(TOP_LEFT_LDR);
+    int topr = analogRead(TOP_RIGHT_LDR);
+    int botl = analogRead(BOTTOM_LEFT_LDR);
+    int botr = analogRead(BOTTOM_RIGHT_LDR);
 
-  // calculando el Promedio
-  int avgtop   = average(topl, topr); //Promedio del top LDRs
-  int avgbot   = average(botl, botr); //Promedio del bottom LDRs
-  int avgleft  = average(topl, botl); //Promedio del left LDRs
-  int avgright = average(topr, botr); //Promedio del right LDRs
-  
-  if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, DOWN  );
-  else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, UP    );
-  delay(10);
+    // calculando el Promedio
+    int avgtop   = average(topl, topr); //Promedio del top LDRs
+    int avgbot   = average(botl, botr); //Promedio del bottom LDRs
+    int avgleft  = average(topl, botl); //Promedio del left LDRs
+    int avgright = average(topr, botr); //Promedio del right LDRs
 
-  if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, LEFT  );
-  else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, RIGHT );
-  delay(10);
+    if ( avgbot > avgtop + ANALOG_BIAS )          move_servo( servoV, DOWN  );
+    else if ( avgbot  + ANALOG_BIAS < avgtop)     move_servo( servoV, UP    );
+    else readyV = true;
+    delay(10);
+
+    if ( avgleft > avgright  + ANALOG_BIAS )      move_servo( servoH, LEFT  );
+    else if ( avgleft + ANALOG_BIAS < avgright )  move_servo( servoH, RIGHT );
+    else readyH = true;
+    delay(10);
+  } while (!readyH || !readyV);
 }
