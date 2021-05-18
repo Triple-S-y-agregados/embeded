@@ -28,24 +28,23 @@ void update_servos( Servo& servoH, Servo& servoV ) {
 
   int topl = 0, topr = 0, botl = 0, botr = 0;
 
-
   //capturando valores analogicos de cada LDR
   topl = analogRead(TOP_LEFT_LDR);
   topr = analogRead(TOP_RIGHT_LDR);
   botl = analogRead(BOTTOM_LEFT_LDR);
   botr = analogRead(BOTTOM_RIGHT_LDR);
 
-  while (!readyV) {
+  while (!readyV || !readyH) {
+    
     if ( average(botl, botr) > average(topl, topr) + ANALOG_BIAS )        move_servo( servoV, DOWN  );
     else if ( average(botl, botr)  + ANALOG_BIAS < average(topl, topr))   move_servo( servoV, UP    );
     else readyV = true;
     delay(10);
-  }
 
-  while (!readyH) {
     if ( average(topl, botl) > average(topr, botr)  + ANALOG_BIAS )       move_servo( servoH, LEFT  );
     else if ( average(topl, botl) + ANALOG_BIAS < average(topr, botr) )   move_servo( servoH, RIGHT );
     else readyH = true;
     delay(10);
+    
   }
 }
