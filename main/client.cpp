@@ -1,4 +1,5 @@
 #include "client.h"
+#include "control_servos.h"
 
 TaskHandle_t Task1;
 HTTPClient http;
@@ -14,6 +15,8 @@ void postVoltage() {
   float V_pin = map(analogRead( PANEL_PIN ), 0, 4095, 0, 3); // Puede que sea necesario cambiar el voltaje máximo
   float V_panel = 4 * V_pin;
   doc["voltage"] = V_panel;
+  doc["vertical"] = servoV.read();
+  doc["horizontal"] = servoH.read();
   serializeJson( doc, buffer );
 
   Serial.println(buffer);
